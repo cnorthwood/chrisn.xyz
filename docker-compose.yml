@@ -1,0 +1,53 @@
+version: "3.4"
+services:
+  db:
+    image: mariadb:10.5
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: development
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: password
+
+  wordpress:
+    build:
+      context: .
+      target: dev-site
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      DB_NAME: wordpress
+      DB_USER: wordpress
+      DB_PASSWORD: password
+      DB_HOST: db
+      WP_ENV: development
+      WP_HOME: http://localhost:8080
+      WP_SITEURL: http://localhost:8080/wp
+      VITE_SERVER: http://localhost:5173/
+      AUTH_KEY: 'A#ixs&Mb!uU[JvtEC/cQ-<cB_gAMIZv%|0v!W^c7Q>L@P0K2<`fhsGE2.vh^<r5'
+      SECURE_AUTH_KEY: 'a#bS:jzcwTj6&/Gh<^9}f&shThhYM>2C2>d/n3Wo!.aoS7-iX^f0+IH,&e5t{|N'
+      LOGGED_IN_KEY: '<6hQ15_m?1=).QdI/,@g4BLd!uhVuk(^D}=)7G7aahYpB>#p%9-pMgX`lpY5gqP'
+      NONCE_KEY: '0*0J7A[2SC-qP2Q^af(Ngj<FQoIY&Y9s&I:5Ey5o@GS?VT8_k)ge|m;P,3r&RlH*'
+      AUTH_SALT: 'elXow:4FY_=eH!%[:|5dBFH{=w+4)9k]xq}2rk=zqGBr}j1+](?|K[p=hUE3I#91'
+      SECURE_AUTH_SALT: '=C&<=-|QG/U/@m)3vZ4CC/XMq}`T}?>(vooVA/En`?g{`Eb{@/XouAP7<iUgRGXQ'
+      LOGGED_IN_SALT: '#Omievwz|E=,tq[uY=`=*Vy?`Tx&]v[#I+*oyZ.D,ptllsEQ=r+%v1#gm(2dG>I'
+      NONCE_SALT: 'sBqDp`uWi=F^t?XVPJig7wNlhD*^TZ8}po?gHZQmOlY@6M*Ot=8SMkjoSvnM*XO'
+    volumes:
+      - .:/app
+      - /app/vendor
+    working_dir: /app
+    command: bash -c 'composer install && (nginx; /usr/sbin/php-fpm --nodaemonize)'
+
+  theme:
+    build:
+      context: .
+      target: dev-theme
+    restart: unless-stopped
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/web/app/themes/chrisn-xyz/node_modules
+    working_dir: /app/web/app/themes/chrisn-xyz/
+    command: bash -c 'yarn && yarn dev'

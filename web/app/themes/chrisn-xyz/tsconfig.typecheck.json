@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "files": ["assets/main.ts"],
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

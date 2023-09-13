@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "downlevelIteration": true,
+    "sourceMap": true,
+    "types": ["vite/client", "jest"]
+  },
+  "include": [
+    "./assets/**/*.ts",
+    "./assets/**/*.tsx",
+    "./assets/**/*.js",
+    "./assets/**/*.jsx"
+  ]
+}

@@ -84,5 +84,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@fontsource/b612": "^5.0.8"
   }
 }

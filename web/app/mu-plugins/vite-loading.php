@@ -15,7 +15,7 @@ add_filter(
         }
 
         if ($module) {
-            $tag = str_replace("type='text/javascript'", "type='module'", $tag);
+            $tag = str_replace('></', "type='module'></", $tag);
         }
 
         return $tag;

@@ -17,4 +17,9 @@ export default defineConfig({
       plugins: [postcssPresetEnv({ browsers: "defaults" })],
     },
   },
+  server: {
+    origin: "http://localhost:5173",
+    port: 5173,
+    strictPort: true,
+  },
 });

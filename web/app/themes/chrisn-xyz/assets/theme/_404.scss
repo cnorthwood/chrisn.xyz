@@ -6,16 +6,3 @@
   align-items: center;
   min-height: 100vh;
 }
-
-.error404__main {
-  background: $prose-bg;
-  border: $bold-box-thickness solid $bold-box-colour;
-  border-radius: $bold-box-radius;
-  padding: 1rem;
-  margin: 1rem;
-  max-width: 40rem;
-}
-
-.error404__heading {
-  @include heading-typeface;
-}

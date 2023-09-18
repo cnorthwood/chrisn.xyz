@@ -1,0 +1,12 @@
+$content-box-thickness: 0.125rem;
+$content-box-radius: 2 * $content-box-thickness;
+$content-box-colour: #000;
+
+.content-box {
+  background: $prose-bg;
+  border: $content-box-thickness solid $content-box-colour;
+  border-radius: $content-box-radius;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 40rem;
+}

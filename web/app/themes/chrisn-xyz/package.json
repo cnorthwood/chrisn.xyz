@@ -86,6 +86,7 @@
     ]
   },
   "dependencies": {
-    "@fontsource/b612": "^5.0.8"
+    "@fontsource/b612": "^5.0.8",
+    "@fontsource/noto-sans": "^5.0.12"
   }
 }

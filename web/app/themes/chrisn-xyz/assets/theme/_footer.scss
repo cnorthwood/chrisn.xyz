@@ -1,0 +1,12 @@
+.cn-footer {
+  text-align: center;
+  margin: 0 auto 34px;
+  padding: 34px 0;
+  width: 100%;
+
+  > p:first-child {
+    display: inline-block;
+    border-top: 1px solid $prose-colour-subtle;
+    padding-top: 34px;
+  }
+}

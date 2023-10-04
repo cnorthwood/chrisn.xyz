@@ -4,6 +4,7 @@ function chrisnxyz_setup()
 {
     add_theme_support('automatic-feed-links');
     add_theme_support('html5', ['script', 'style']);
+    add_theme_support('title-tag');
 }
 add_action('after_setup_theme', 'chrisnxyz_setup');
 

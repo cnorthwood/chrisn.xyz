@@ -7,6 +7,6 @@
       </h1>
       <p class="t-body"><?php echo get_bloginfo("description", "display") ?></p>
     </header>
-    <?php wp_nav_menu(["theme_location" => "front-page"]); ?>
+    <nav class="cn-home-links t-prose"><?php wp_nav_menu(["theme_location" => "front-page"]); ?></nav>
   </main>
 <?php get_footer();

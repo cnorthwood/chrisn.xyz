@@ -1,3 +1,4 @@
+@import "@fontsource/b612/latin-400.css";
 @import "@fontsource/b612/latin-700.css";
 @import "@fontsource/noto-sans/latin-300";
 @import "@fontsource/noto-sans/latin-400";
@@ -40,7 +41,8 @@
 }
 
 .t-body,
-.t-prose p {
+.t-prose p,
+.t-prose li {
   @include typeface-body;
 
   font-size: 16px;

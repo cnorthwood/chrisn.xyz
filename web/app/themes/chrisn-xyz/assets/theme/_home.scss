@@ -14,3 +14,56 @@
 .cn-home-info__profile {
   margin: -1rem -1rem 0 0;
 }
+
+.cn-home-links {
+  margin: 0 1rem;
+  text-align: center;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu {
+    text-transform: uppercase;
+    margin: 0;
+    padding: 1rem;
+
+    > li {
+      background: $prose-bg;
+      border: $content-box-thickness solid $content-box-colour;
+      border-radius: $content-box-radius;
+    }
+  }
+
+  .sub-menu {
+    text-transform: none;
+
+    > li {
+      border-top: $content-box-thickness solid $content-box-colour;
+      margin: 0;
+    }
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    @include typeface-heading;
+    color: #00f;
+    display: block;
+    padding: 0.5rem;
+    text-decoration: none;
+    width: 100%;
+
+    &:visited {
+      color: #0b0080;
+    }
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

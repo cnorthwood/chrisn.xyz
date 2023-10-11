@@ -1,0 +1,16 @@
+.cn-home-info {
+  width: auto;
+}
+
+.cn-home-info h1 {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    align-self: center;
+  }
+}
+
+.cn-home-info__profile {
+  margin: -1rem -1rem 0 0;
+}

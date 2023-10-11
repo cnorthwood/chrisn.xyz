@@ -6,6 +6,7 @@ $content-box-colour: #000;
   background: $prose-bg;
   border: $content-box-thickness solid $content-box-colour;
   border-radius: $content-box-radius;
+  box-sizing: border-box;
   padding: 1rem;
   margin: 1rem;
   max-width: 40rem;
@@ -16,4 +17,5 @@ $content-box-colour: #000;
   display: flex;
   flex-flow: column;
   align-items: center;
+  padding: 0 1rem;
 }

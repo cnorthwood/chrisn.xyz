@@ -33,6 +33,7 @@
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-prettier": "^4.0.2",
+    "stylelint-selector-bem-pattern": "^3.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
@@ -57,12 +58,19 @@
     ]
   },
   "stylelint": {
+    "plugins": [
+      "stylelint-selector-bem-pattern"
+    ],
     "extends": [
       "stylelint-config-standard-scss",
       "stylelint-prettier/recommended"
     ],
     "rules": {
-      "prettier/prettier": true
+      "selector-class-pattern": null,
+      "prettier/prettier": true,
+      "plugin/selector-bem-pattern": {
+        "preset": "bem"
+      }
     }
   },
   "prettier": {

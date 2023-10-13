@@ -24,6 +24,10 @@
     padding: 0;
   }
 
+  li {
+    list-style: none;
+  }
+
   .menu {
     text-transform: uppercase;
     margin: 0;
@@ -45,12 +49,9 @@
     }
   }
 
-  li {
-    list-style: none;
-  }
-
   a {
     @include typeface-heading;
+
     color: #00f;
     display: block;
     padding: 0.5rem;

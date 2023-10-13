@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import manifestSRI from "vite-plugin-manifest-sri";
 
 export default defineConfig({
+  base: "./",
   build: {
     manifest: true,
     rollupOptions: {

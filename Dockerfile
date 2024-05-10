@@ -1,4 +1,4 @@
-FROM fedora:38 AS dev-site
+FROM fedora:40 AS dev-site
 
 EXPOSE 8080
 
@@ -10,7 +10,7 @@ RUN dnf upgrade -y && \
     rm -f /etc/nginx/nginx.conf && \
     ln -s /app/config/nginx.conf /etc/nginx/nginx.conf
 
-FROM fedora:38 AS dev-theme
+FROM fedora:40 AS dev-theme
 
 EXPOSE 5173
 
@@ -20,7 +20,7 @@ RUN dnf upgrade -y && dnf install -y yarn composer
 
 WORKDIR /build/web/app/themes/chrisn-xyz/
 
-FROM fedora:38 AS builder
+FROM fedora:40 AS builder
 
 RUN dnf upgrade -y && dnf install -y 'dnf-command(config-manager)'
 RUN dnf config-manager --add-repo https://dl.yarnpkg.com/rpm/yarn.repo
@@ -37,7 +37,7 @@ RUN composer install
 WORKDIR /build/web/app/themes/chrisn-xyz/
 RUN yarn && yarn build && rm -rf node_modules
 
-FROM fedora:38
+FROM fedora:40
 
 EXPOSE 8080
 

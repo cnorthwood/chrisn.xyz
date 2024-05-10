@@ -22,6 +22,8 @@ WORKDIR /build/web/app/themes/chrisn-xyz/
 
 FROM fedora:40 AS builder
 
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
 RUN dnf upgrade -y && dnf install -y 'dnf-command(config-manager)'
 RUN dnf config-manager --add-repo https://dl.yarnpkg.com/rpm/yarn.repo
 RUN dnf upgrade -y && dnf install -y yarn composer

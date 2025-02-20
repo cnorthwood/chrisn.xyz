@@ -52,4 +52,4 @@ RUN dnf upgrade -y && \
 COPY config/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /build /app/
 
-CMD nginx; /usr/sbin/php-fpm --nodaemonize
+CMD rm -rf /app/web/app/upload/cache/; nginx; /usr/sbin/php-fpm --nodaemonize

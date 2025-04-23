@@ -39,7 +39,6 @@
     "roots/bedrock-disallow-indexing": "^2.0",
     "roots/wordpress": "*",
     "roots/wp-config": "1.0.0",
-    "roots/wp-password-bcrypt": "1.3.0",
     "wpackagist-theme/twentytwentythree": "^1.0",
     "inpsyde/wp-translation-downloader": "^2.5"
   },

@@ -32,7 +32,7 @@ function vite_load_asset($handle, $entrypoint)
         wp_enqueue_script($handle, getenv("VITE_SERVER") . $entrypoint, [], null);
         wp_scripts()->add_data($handle, "module", true);
     } else {
-        $viteManifest = json_decode(file_get_contents(get_template_directory() . '/../dist/manifest.json'), true);
+        $viteManifest = json_decode(file_get_contents(get_template_directory() . '/../dist/.vite/manifest.json'), true);
         $manifestItem = $viteManifest[$entrypoint];
 
         wp_enqueue_script($handle, get_template_directory_uri() . "/../dist/" . $manifestItem["file"], [], null);

@@ -43,7 +43,7 @@
     "inpsyde/wp-translation-downloader": "^2.5"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.7.1",
+    "squizlabs/php_codesniffer": "^4.0.1",
     "roave/security-advisories": "dev-latest"
   },
   "config": {

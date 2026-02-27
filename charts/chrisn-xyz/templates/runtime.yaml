@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chrisn-xyz.fullname" . }}
+  labels:
+    {{- include "chrisn-xyz.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "chrisn-xyz.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "chrisn-xyz.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ include "chrisn-xyz.fullname" . }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: "{{ .Values.image.pullPolicy }}"
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 13 }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+          env:
+            - name: DB_HOST
+              value: "{{ include "chrisn-xyz.fullname" . }}-mariadb-cluster"
+            - name: DB_USER
+              value: "{{ index .Values "mariadb-cluster" "mariadb" "username" }}"
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ include "chrisn-xyz.fullname" . }}-mariadb-cluster-password"
+                  key: password
+            - name: DB_NAME
+              value: "{{ index .Values "mariadb-cluster" "mariadb" "database" }}"
+            - name: WP_ENV
+              value: "production"
+            - name: WP_HOME
+              value: "https://{{ .Values.ingress.hostname }}"
+            - name: WP_SITEURL
+              value: "https://{{ .Values.ingress.hostname }}/wp"
+          envFrom:
+            - secretRef:
+                name: "{{ .Values.wordpressSecretsName }}"
+          volumeMounts:
+            - mountPath: /app/web/app/uploads/
+              name: wp-uploads
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      restartPolicy: Always
+      volumes:
+        - name: wp-uploads
+          persistentVolumeClaim:
+            claimName: {{ include "chrisn-xyz.fullname" . }}-wp-uploads
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

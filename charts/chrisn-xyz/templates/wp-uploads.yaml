@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "chrisn-xyz.fullname" . }}-wp-uploads
+  labels:
+    {{- include "chrisn-xyz.labels" . | nindent 4 }}
+    {{- toYaml .Values.dbStoragePvcLabels | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: "{{ .Values.dbStorageRequest }}"
+  {{- if .Values.dbStorageClassName }}
+  storageClassName: "{{ .Values.dbStorageClassName }}"
+  {{- end }}

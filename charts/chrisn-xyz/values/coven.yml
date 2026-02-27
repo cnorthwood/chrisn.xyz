@@ -1,0 +1,37 @@
+ingress:
+  hostname: chrisn.xyz
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    traefik.ingress.kubernetes.io/router.middlewares: "kube-system-redirect-https@kubernetescrd"
+  tls:
+    - hosts:
+        - chrisn.xyz
+      secretName: chrisn-xyz-tls
+  probe:
+    enabled: true
+
+mariadb-cluster:
+  mariadb:
+    metrics:
+      enabled: true
+  physicalBackups:
+    - name: nightly
+      schedule:
+        cron: "18 22 * * *"
+      storage:
+        s3:
+          bucket: coven-backups
+          prefix: mariadb/chrisn-xyz
+          region: europe-west2
+          endpoint: storage.googleapis.com
+          accessKeyIdSecretKeyRef:
+            name: gcp-backups
+            key: AWS_ACCESS_KEY_ID
+          secretAccessKeySecretKeyRef:
+            name: gcp-backups
+            key: AWS_SECRET_ACCESS_KEY
+      compression: gzip
+
+dbStoragePvcLabels:
+  recurring-job.longhorn.io/source: enabled
+  recurring-job.longhorn.io/nightly-backup: enabled

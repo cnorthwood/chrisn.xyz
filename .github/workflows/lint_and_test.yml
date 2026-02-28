@@ -1,0 +1,34 @@
+name: Lint and test
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: ["opened", "synchronize"]
+
+jobs:
+  theme_test:
+    name: Theme tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: install dependencies
+        working-directory: ./web/app/themes/chrisn-xyz/
+        run: yarn install
+
+      - name: try build
+        working-directory: ./web/app/themes/chrisn-xyz/
+        run: yarn build
+
+  php_test:
+    name: PHP tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: install dependencies
+        run: composer install
+
+      - name: run tests
+        run: composer test

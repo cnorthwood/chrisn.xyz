@@ -20,7 +20,7 @@
     "@typescript-eslint/parser": "^6.7.0",
     "concurrently": "^8.2.1",
     "eslint": "^8.20.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest-dom": "^5.5.0",
     "eslint-plugin-prettier": "^5.5.5",

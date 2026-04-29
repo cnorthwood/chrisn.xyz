@@ -35,7 +35,7 @@
     "stylelint-prettier": "^4.0.2",
     "stylelint-selector-bem-pattern": "^3.0.1",
     "ts-jest": "^29.4.9",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^8.0.10",
     "vite-plugin-manifest-sri": "^0.2.0"
   },

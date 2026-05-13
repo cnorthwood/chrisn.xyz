@@ -41,7 +41,15 @@
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": { "ignoreDeprecations": "6.0" }
+        }
+      ]
+    }
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

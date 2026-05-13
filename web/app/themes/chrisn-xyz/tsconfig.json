@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": ".",
     "target": "es2021",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -10,11 +11,10 @@
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react",
-    "downlevelIteration": true,
     "sourceMap": true,
     "types": ["vite/client", "jest"]
   },

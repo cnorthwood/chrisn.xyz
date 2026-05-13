@@ -35,13 +35,21 @@
     "stylelint-prettier": "^4.0.2",
     "stylelint-selector-bem-pattern": "^3.0.1",
     "ts-jest": "^29.4.9",
-    "typescript": "^5.9.3",
+    "typescript": "^6.0.3",
     "vite": "^8.0.12",
     "vite-plugin-manifest-sri": "^0.2.0"
   },
   "jest": {
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "transform": {
+      "^.+\\.tsx?$": [
+        "ts-jest",
+        {
+          "tsconfig": { "ignoreDeprecations": "6.0" }
+        }
+      ]
+    }
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",

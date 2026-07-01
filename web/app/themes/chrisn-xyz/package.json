@@ -16,8 +16,8 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.62.0",
-    "@typescript-eslint/parser": "^8.62.0",
+    "@typescript-eslint/eslint-plugin": "^8.62.1",
+    "@typescript-eslint/parser": "^8.62.1",
     "concurrently": "^10.0.3",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^10.1.8",
@@ -26,9 +26,9 @@
     "eslint-plugin-prettier": "^5.5.6",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
-    "postcss": "^8.5.15",
-    "postcss-preset-env": "^11.3.1",
-    "prettier": "^3.8.4",
+    "postcss": "^8.5.16",
+    "postcss-preset-env": "^11.3.2",
+    "prettier": "^3.9.4",
     "sass": "^1.101.0",
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
@@ -36,7 +36,7 @@
     "stylelint-selector-bem-pattern": "^3.0.1",
     "ts-jest": "^29.4.11",
     "typescript": "^6.0.3",
-    "vite": "^8.1.0",
+    "vite": "^8.1.2",
     "vite-plugin-manifest-sri": "^0.2.0"
   },
   "jest": {

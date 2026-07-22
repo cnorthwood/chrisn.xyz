@@ -16,8 +16,8 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.64.0",
-    "@typescript-eslint/parser": "^8.64.0",
+    "@typescript-eslint/eslint-plugin": "^8.65.0",
+    "@typescript-eslint/parser": "^8.65.0",
     "concurrently": "^10.0.3",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^10.1.8",
@@ -26,17 +26,17 @@
     "eslint-plugin-prettier": "^5.5.6",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
-    "postcss": "^8.5.19",
+    "postcss": "^8.5.22",
     "postcss-preset-env": "^11.3.2",
-    "prettier": "^3.9.5",
-    "sass": "^1.101.0",
+    "prettier": "^3.9.6",
+    "sass": "^1.101.3",
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-prettier": "^4.0.2",
     "stylelint-selector-bem-pattern": "^3.0.1",
-    "ts-jest": "^29.4.11",
+    "ts-jest": "^29.4.12",
     "typescript": "^6.0.3",
-    "vite": "^8.1.4",
+    "vite": "^8.1.5",
     "vite-plugin-manifest-sri": "^0.2.0"
   },
   "jest": {
@@ -102,7 +102,7 @@
     ]
   },
   "dependencies": {
-    "@fontsource/b612": "^5.2.7",
-    "@fontsource/noto-sans": "^5.2.10"
+    "@fontsource/b612": "^5.3.0",
+    "@fontsource/noto-sans": "^5.3.0"
   }
 }

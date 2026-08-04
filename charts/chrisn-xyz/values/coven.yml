@@ -32,6 +32,6 @@ mariadb-cluster:
             key: AWS_SECRET_ACCESS_KEY
       compression: gzip
 
-dbStoragePvcLabels:
+uploadsStoragePvcLabels:
   recurring-job.longhorn.io/source: enabled
   recurring-job.longhorn.io/nightly-backup: enabled

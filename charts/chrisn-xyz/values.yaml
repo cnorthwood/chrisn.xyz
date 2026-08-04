@@ -3,11 +3,11 @@
 # Declare variables to be passed into your templates.
 
 # how much storage to allocate for the uploads folder
-dbStorageRequest: 5Gi
+uploadsStorageRequest: 5Gi
 
 # the class of storage to be requested
-dbStorageClassName: ""
-dbStoragePvcLabels: {}
+uploadsStorageClassName: ""
+uploadsStoragePvcLabels: {}
 
 # the secret which contains the WordPress secrets
 wordpressSecretsName: wordpress

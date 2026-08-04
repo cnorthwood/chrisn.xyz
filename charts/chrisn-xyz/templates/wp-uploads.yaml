@@ -4,13 +4,13 @@ metadata:
   name: {{ include "chrisn-xyz.fullname" . }}-wp-uploads
   labels:
     {{- include "chrisn-xyz.labels" . | nindent 4 }}
-    {{- toYaml .Values.dbStoragePvcLabels | nindent 4 }}
+    {{- toYaml .Values.uploadsStoragePvcLabels | nindent 4 }}
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: "{{ .Values.dbStorageRequest }}"
-  {{- if .Values.dbStorageClassName }}
-  storageClassName: "{{ .Values.dbStorageClassName }}"
+      storage: "{{ .Values.uploadsStorageRequest }}"
+  {{- if .Values.uploadsStorageClassName }}
+  storageClassName: "{{ .Values.uploadsStorageClassName }}"
   {{- end }}

@@ -40,9 +40,10 @@ FROM fedora:44
 EXPOSE 8080
 
 RUN dnf upgrade -y && \
-    dnf install -y nginx php-fpm php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip && \
+    dnf install -y nginx php-fpm php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip php-intl && \
     sed -i '/^;clear_env/s/^;//' /etc/php-fpm.d/www.conf && \
     sed -i '/upload_max_filesize/s/= *2M/= 50M/' /etc/php.ini && \
+    sed -i '/post_max_size/s/= *8M/= 50M/' /etc/php.ini && \
     mkdir /run/php-fpm
 
 COPY config/nginx.conf /etc/nginx/nginx.conf

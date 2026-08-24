@@ -46,7 +46,9 @@
       "^.+\\.tsx?$": [
         "ts-jest",
         {
-          "tsconfig": { "ignoreDeprecations": "6.0" }
+          "tsconfig": {
+            "ignoreDeprecations": "6.0"
+          }
         }
       ]
     }

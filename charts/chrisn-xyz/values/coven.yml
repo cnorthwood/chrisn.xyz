@@ -10,6 +10,16 @@ ingress:
   probe:
     enabled: true
 
+affinity:
+  podAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: mariadb
+            app.kubernetes.io/instance: chrisn-xyz-mariadb-cluster
+            k8s.mariadb.com/role: primary
+        topologyKey: coven.omelette.gay/location
+
 mariadb-cluster:
   mariadb:
     metrics:

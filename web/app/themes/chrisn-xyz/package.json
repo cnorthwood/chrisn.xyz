@@ -10,18 +10,16 @@
     "test": "jest",
     "typecheck": "tsc -p tsconfig.typecheck.json",
     "lint": "concurrently yarn:lint:* yarn:typecheck:*",
-    "lint:eslint": "eslint assets --ext .js,.jsx,.ts,.tsx --max-warnings 0",
+    "lint:eslint": "eslint --max-warnings 0",
     "lint:stylelint": "stylelint assets/**/*.scss"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "@types/jest": "^30.0.0",
-    "@typescript-eslint/eslint-plugin": "^8.72.1",
-    "@typescript-eslint/parser": "^8.72.1",
     "concurrently": "^10.0.6",
-    "eslint": "^8.20.0",
+    "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest-dom": "^5.10.1",
     "eslint-plugin-prettier": "^5.5.7",
     "jest": "^30.5.2",
@@ -36,6 +34,7 @@
     "stylelint-selector-bem-pattern": "^3.0.1",
     "ts-jest": "^29.4.15",
     "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.1",
     "vite": "^8.3.5",
     "vite-plugin-manifest-sri": "^0.2.0"
   },
@@ -52,20 +51,6 @@
         }
       ]
     }
-  },
-  "eslintConfig": {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-      "import"
-    ],
-    "extends": [
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:prettier/recommended",
-      "plugin:import/recommended",
-      "plugin:import/typescript",
-      "plugin:jest-dom/recommended"
-    ]
   },
   "stylelint": {
     "plugins": [

@@ -28,10 +28,10 @@
     "postcss-preset-env": "^11.6.2",
     "prettier": "^3.9.10",
     "sass": "^1.107.1",
-    "stylelint": "^15.10.3",
-    "stylelint-config-standard-scss": "^11.0.0",
-    "stylelint-prettier": "^4.0.2",
-    "stylelint-selector-bem-pattern": "^3.0.1",
+    "stylelint": "^17.0.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "stylelint-prettier": "^5.0.0",
+    "stylelint-selector-bem-pattern": "^5.0.0",
     "ts-jest": "^29.4.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1",
@@ -54,11 +54,11 @@
   },
   "stylelint": {
     "plugins": [
-      "stylelint-selector-bem-pattern"
+      "stylelint-selector-bem-pattern",
+      "stylelint-prettier"
     ],
     "extends": [
-      "stylelint-config-standard-scss",
-      "stylelint-prettier/recommended"
+      "stylelint-config-standard-scss"
     ],
     "rules": {
       "selector-class-pattern": null,

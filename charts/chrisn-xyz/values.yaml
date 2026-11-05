@@ -81,3 +81,6 @@ mariadb-cluster:
     replicas: 1
     galera:
       enabled: false
+    image: mariadb:11.8.9 # renovate: datasource=docker
+    updateStrategy:
+      mariadbAutoUpgradeEnabled: true

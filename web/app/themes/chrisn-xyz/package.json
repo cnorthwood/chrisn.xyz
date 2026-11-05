@@ -31,7 +31,7 @@
     "stylelint": "^15.10.3",
     "stylelint-config-standard-scss": "^11.0.0",
     "stylelint-prettier": "^4.0.2",
-    "stylelint-selector-bem-pattern": "^3.0.1",
+    "stylelint-selector-bem-pattern": "^5.0.0",
     "ts-jest": "^29.4.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.1",

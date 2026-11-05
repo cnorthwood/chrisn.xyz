@@ -11,6 +11,9 @@
     "helmv3",
     "custom.regex"
   ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
   "customManagers": [
     {
       "customType": "regex",
@@ -55,6 +58,11 @@
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": false
+    },
+    {
+      "description": "WordPress isn't semver: x.y is a feature release, x.y.z a maintenance/security release. composer.json allows only maintenance releases (~7.1.4), so lockfile maintenance never moves to a new feature release. Maintenance releases get their own lockfile-only PR; a feature release (e.g. 7.2) gets a PR that also updates the constraint.",
+      "matchPackageNames": ["roots/wordpress"],
+      "rangeStrategy": "update-lockfile"
     },
     {
       "description": "Theme dependencies: group minor and patch updates into one PR (as Dependabot's 'regular-updates' group did).",

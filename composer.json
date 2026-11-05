@@ -37,7 +37,7 @@
     "oscarotero/env": "^2.1",
     "roots/bedrock-autoloader": "^1.0",
     "roots/bedrock-disallow-indexing": "^2.0",
-    "roots/wordpress": "*",
+    "roots/wordpress": "~7.1.4",
     "roots/wp-config": "1.0.0",
     "wpackagist-theme/twentytwentythree": "^1.0",
     "inpsyde/wp-translation-downloader": "^2.5"

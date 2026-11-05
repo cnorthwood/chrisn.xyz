@@ -81,6 +81,6 @@ mariadb-cluster:
     replicas: 1
     galera:
       enabled: false
-    image: mariadb:11.8.9 # renovate: datasource=docker
+    image: mariadb:11.8.9@sha256:c4124d1afa875e47f2892edf26b482fa54f796e2f342d3717a04ca091a22a9bd # renovate: datasource=docker
     updateStrategy:
       mariadbAutoUpgradeEnabled: true

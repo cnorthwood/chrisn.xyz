@@ -1,0 +1,72 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "mode": "full",
+  "enabledManagers": [
+    "composer",
+    "npm",
+    "dockerfile",
+    "docker-compose",
+    "github-actions",
+    "helmv3",
+    "custom.regex"
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Container images in Helm values given as a single string, marked with a '# renovate: datasource=docker' comment",
+      "managerFilePatterns": ["/(^|/)values\\.ya?ml$/"],
+      "matchStrings": [
+        "image:\\s*(?<depName>[^\\s:@]+):(?<currentValue>[^\\s@]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\s*#\\s*renovate:\\s*datasource=(?<datasource>\\S+)"
+      ],
+      "autoReplaceStringTemplate": "image: {{{depName}}}:{{{newValue}}}{{#if newDigest}}@{{{newDigest}}}{{/if}} # renovate: datasource={{{datasource}}}"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "Pin container images by digest, so image rebuilds (e.g. OS security fixes in the base image) show up as updates.",
+      "matchManagers": ["dockerfile", "docker-compose", "custom.regex"],
+      "pinDigests": true
+    },
+    {
+      "description": "Automerge base image rebuilds. Each merge rebuilds and redeploys the site, which also picks up the 'dnf upgrade' in the Dockerfile.",
+      "matchManagers": ["dockerfile"],
+      "matchUpdateTypes": ["digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
+      "matchManagers": ["helmv3"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
+      "description": "MariaDB: LTS series only. From 12.3 onwards every .3 release is LTS; 11.8 is the last LTS from before that rule and can be removed once we're on 12.3.",
+      "matchPackageNames": ["mariadb"],
+      "allowedVersions": "/^(11\\.8|\\d+\\.3)(\\.|$)/"
+    },
+    {
+      "description": "Automerge patch releases and image rebuilds within a MariaDB series. In production each merge restarts the database briefly. Moving to a new series is a major update and is never automerged.",
+      "matchPackageNames": ["mariadb"],
+      "matchUpdateTypes": ["patch", "digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
+      "description": "Theme dependencies: group minor and patch updates into one PR (as Dependabot's 'regular-updates' group did).",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "theme dependencies"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "github-actions",
+      "automerge": false
+    }
+  ]
+}

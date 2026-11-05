@@ -1,4 +1,4 @@
-FROM fedora:latest AS dev-site
+FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3817612839c AS dev-site
 
 EXPOSE 8080
 
@@ -10,7 +10,7 @@ RUN dnf upgrade -y && \
     rm -f /etc/nginx/nginx.conf && \
     ln -s /app/config/nginx.conf /etc/nginx/nginx.conf
 
-FROM fedora:latest AS dev-theme
+FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3817612839c AS dev-theme
 
 EXPOSE 5173
 
@@ -18,7 +18,7 @@ RUN dnf upgrade -y && dnf install -y yarnpkg composer
 
 WORKDIR /build/web/app/themes/chrisn-xyz/
 
-FROM fedora:latest AS builder
+FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3817612839c AS builder
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -35,7 +35,7 @@ RUN composer install
 WORKDIR /build/web/app/themes/chrisn-xyz/
 RUN yarn && yarn build && rm -rf node_modules
 
-FROM fedora:latest
+FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3817612839c
 
 EXPOSE 8080
 

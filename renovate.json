@@ -11,8 +11,10 @@
     "helmv3",
     "custom.regex"
   ],
+  "timezone": "Europe/London",
   "lockFileMaintenance": {
-    "enabled": true
+    "enabled": true,
+    "schedule": ["before 6am on monday"]
   },
   "customManagers": [
     {
@@ -65,15 +67,12 @@
       "rangeStrategy": "update-lockfile"
     },
     {
-      "description": "Theme dependencies: group minor and patch updates into one PR (as Dependabot's 'regular-updates' group did).",
-      "matchManagers": ["npm"],
+      "description": "Weekly roll-up: minor and patch updates for application dependencies go into one PR, created on Monday morning alongside lockfile maintenance. Major updates and security fixes (vulnerabilityAlerts) are not covered by this rule, so they still open immediately. WordPress and MariaDB have their own rules above.",
+      "matchManagers": ["composer", "npm", "github-actions"],
       "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "theme dependencies"
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "groupName": "github-actions",
+      "matchPackageNames": ["!roots/wordpress", "!mariadb"],
+      "groupName": "weekly updates",
+      "schedule": ["before 6am on monday"],
       "automerge": false
     }
   ]

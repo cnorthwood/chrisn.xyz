@@ -62,6 +62,14 @@
       "platformAutomerge": false
     },
     {
+      "description": "Automerge mysqld-exporter updates, including minor releases as it's 0.x. In production each merge restarts the database briefly, as the exporter runs as a sidecar. A major release is never automerged.",
+      "matchPackageNames": ["prom/mysqld-exporter"],
+      "matchUpdateTypes": ["minor", "patch", "digest", "pinDigest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": false
+    },
+    {
       "description": "WordPress isn't semver: x.y is a feature release, x.y.z a maintenance/security release. composer.json allows only maintenance releases (~7.1.4), so lockfile maintenance never moves to a new feature release. Maintenance releases get their own lockfile-only PR; a feature release (e.g. 7.2) gets a PR that also updates the constraint.",
       "matchPackageNames": ["roots/wordpress"],
       "rangeStrategy": "update-lockfile"

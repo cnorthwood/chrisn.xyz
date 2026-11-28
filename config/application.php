@@ -120,8 +120,7 @@ if (env('S3_UPLOADS_BUCKET')) {
     Config::define('S3_UPLOADS_ENDPOINT', env('S3_UPLOADS_ENDPOINT'));
     // Where browsers fetch the files from
     Config::define('S3_UPLOADS_BUCKET_URL', env('S3_UPLOADS_BUCKET_URL'));
-    // Set to false to load the plugin without using it. Its WP-CLI commands then aren't registered either, so run them
-    // with S3_UPLOADS_AUTOENABLE=true in the environment
+    // Set to false to load the plugin without using it
     Config::define('S3_UPLOADS_AUTOENABLE', env('S3_UPLOADS_AUTOENABLE') ?? true);
     // Anyone can read the bucket through its bucket policy, so objects don't need their own ACL
     Config::define('S3_UPLOADS_OBJECT_ACL', 'private');

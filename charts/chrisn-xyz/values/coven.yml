@@ -49,7 +49,7 @@ uploadsStoragePvcLabels:
 # The object store is made by coven (coven/apps/chrisn-xyz.tf)
 s3Uploads:
   enabled: true
-  bucket: uploads
+  bucket: app
   endpoint: http://chrisn-xyz-rustfs-svc.chrisn-xyz.svc.cluster.local:9000
-  bucketUrl: https://media.chrisn.xyz/uploads
+  bucketUrl: https://media.chrisn.xyz/app
   credentialsSecretName: chrisn-xyz-object-store-keys

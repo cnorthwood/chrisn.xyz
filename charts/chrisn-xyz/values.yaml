@@ -2,13 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-# how much storage to allocate for the uploads folder
-uploadsStorageRequest: 5Gi
-
-# the class of storage to be requested
-uploadsStorageClassName: ""
-uploadsStoragePvcLabels: {}
-
 # the secret which contains the WordPress secrets
 wordpressSecretsName: wordpress
 

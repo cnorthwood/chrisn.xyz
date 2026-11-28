@@ -28,6 +28,7 @@ COPY config /build/config/
 COPY web /build/web/
 COPY composer.json /build/composer.json
 COPY composer.lock /build/composer.lock
+COPY wp-cli.yml /build/wp-cli.yml
 
 WORKDIR /build
 RUN composer install
@@ -51,4 +52,4 @@ COPY --from=builder /build /app/
 
 RUN mkdir -p /var/cache/nginx && chown -R nginx:nginx /var/cache/nginx
 
-CMD rm -rf /app/web/app/upload/cache/; nginx; /usr/sbin/php-fpm --nodaemonize
+CMD nginx; /usr/sbin/php-fpm --nodaemonize

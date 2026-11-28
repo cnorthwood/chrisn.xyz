@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "jsx": "react",
     "sourceMap": true,
-    "types": ["vite/client", "jest"]
+    "types": ["vite/client", "vitest/globals"]
   },
   "include": [
     "./assets/**/*.ts",

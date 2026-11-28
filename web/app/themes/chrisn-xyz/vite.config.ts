@@ -1,5 +1,5 @@
 import postcssPresetEnv from "postcss-preset-env";
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 import manifestSRI from "vite-plugin-manifest-sri";
 
 export default defineConfig({
@@ -17,6 +17,10 @@ export default defineConfig({
     postcss: {
       plugins: [postcssPresetEnv({ browsers: "defaults" })],
     },
+  },
+  test: {
+    environment: "jsdom",
+    globals: true,
   },
   server: {
     origin: "http://localhost:5173",

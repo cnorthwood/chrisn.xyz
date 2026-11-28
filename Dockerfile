@@ -3,7 +3,7 @@ FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3
 EXPOSE 8080
 
 RUN dnf upgrade -y && \
-    dnf install -y composer nginx php-fpm php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip php-pecl-xdebug && \
+    dnf install -y composer nginx php-fpm php-cli php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip php-pecl-xdebug && \
     sed -i '/^;clear_env/s/^;//' /etc/php-fpm.d/www.conf && \
     sed -i '/upload_max_filesize/s/= *2M/= 50M/' /etc/php.ini && \
     mkdir /run/php-fpm && \
@@ -40,7 +40,7 @@ FROM fedora:latest@sha256:a7d72ba2745b100a3351087472e5ee7b2450af7cf331e7673007e3
 EXPOSE 8080
 
 RUN dnf upgrade -y && \
-    dnf install -y nginx php-fpm php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip php-intl && \
+    dnf install -y nginx php-fpm php-cli php-json php-opcache php-xml php-gd php-curl php-mysqlnd php-mbstring php-pecl-imagick php-pecl-zip php-zip php-intl && \
     sed -i '/^;clear_env/s/^;//' /etc/php-fpm.d/www.conf && \
     sed -i '/upload_max_filesize/s/= *2M/= 50M/' /etc/php.ini && \
     sed -i '/post_max_size/s/= *8M/= 50M/' /etc/php.ini && \

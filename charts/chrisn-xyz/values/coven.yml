@@ -45,3 +45,13 @@ mariadb-cluster:
 uploadsStoragePvcLabels:
   recurring-job.longhorn.io/source: enabled
   recurring-job.longhorn.io/nightly-backup: enabled
+
+# The object store is made by coven (coven/apps/chrisn-xyz.tf). Turned on without being used until the existing uploads
+# have been copied across
+s3Uploads:
+  enabled: true
+  bucket: uploads
+  endpoint: http://chrisn-xyz-rustfs-svc.chrisn-xyz.svc.cluster.local:9000
+  bucketUrl: https://media.chrisn.xyz/uploads
+  autoEnable: false
+  credentialsSecretName: chrisn-xyz-object-store-keys

@@ -17,61 +17,22 @@ To create a local dev environment, you will need Docker installed locally.
 Deployment Information
 ----------------------
 
-This is deployed on Chris's server. There's a systemd unitfile that looks like this
-at `/etc/systemd/system/chrisnxyz.service`
+The site runs on the [coven](https://github.com/omelette-gay/coven) k3s cluster, in the `chrisn-xyz` namespace.
 
-```ini
-[Unit]
-Description=chrisn.xyz
-After=docker.service
-Requires=docker.service
+Every push to `main` builds an image, pushes it to `ghcr.io/cnorthwood/chrisn.xyz`, and deploys it with
+`helm upgrade` using the chart in `charts/chrisn-xyz` and the values in `charts/chrisn-xyz/values/coven.yml`
+(see `.github/workflows/deploy.yml`). The workflow logs in to the cluster through Vault, and deploys roll
+without downtime.
 
-[Service]
-EnvironmentFile=/etc/chrisnxyz.conf
-ExecStartPre=-/bin/sh -c 'docker rm -f chrisnxyz >/dev/null 2>/dev/null'
-ExecStartPre=-/bin/sh -c 'docker pull ghcr.io/cnorthwood/chrisn.xyz:${image_version} >/dev/null'
-ExecStart=/usr/bin/docker run --init --rm \
-                              --env-file /etc/chrisnxyz.conf \
-                              -p 8080:8080 \
-                              --add-host=host.docker.internal:host-gateway \
-                              --mount type=volume,source=chrisnxyz-uploads,target=/app/web/app/uploads/ \
-                              --name chrisnxyz \
-                              ghcr.io/cnorthwood/chrisn.xyz:${image_version}
-ExecStop=/bin/sh -c 'docker stop chrisnxyz >/dev/null'
+The chart runs WordPress and its MariaDB database (through the MariaDB operator, with nightly backups to GCS).
+Everything else comes from coven, in `coven/apps/chrisn-xyz.tf`:
 
-[Install]
-WantedBy=multi-user.target
-```
+* the namespace, and the Vault role the deploy workflow uses
+* the `wordpress` Secret, with WordPress's keys and salts, synced from Vault (`chrisn-xyz/wordpress`)
+* the `gcp-backups` Secret, with the credentials for the database backups
+* the object store for media uploads
 
-The config file at `/etc/chrisn.xyz` has the environment variables needed to run this.
-
-There's an nginx running on my server which reverse proxies to this docker file.
-
-```
-server {
-    listen 80;
-    listen [::]:80;
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-
-    ssl_certificate /etc/letsencrypt/live/chrisn.xyz/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/chrisn.xyz/privkey.pem;
-    add_header Strict-Transport-Security "max-age=31536000" always;
-
-    server_name chrisn.xyz;
-
-    location / {
-        proxy_pass http://localhost:8080;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $remote_addr;
-    }
-
-    location /.well-known/ {
-        root /var/www/html;
-    }
-
-    if ($ssl_protocol = "") {
-       rewrite ^   https://$server_name$request_uri? permanent;
-    }
-}
-```
+Media uploads are stored in the `app` bucket of that object store by the
+[S3 Uploads](https://github.com/humanmade/S3-Uploads) plugin, and served from
+`https://media.chrisn.xyz/app/uploads/...`. Old links to `https://chrisn.xyz/app/uploads/...` redirect there.
+Without a bucket configured, as in the local dev environment, uploads stay on disk.

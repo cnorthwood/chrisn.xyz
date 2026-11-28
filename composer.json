@@ -40,7 +40,10 @@
     "roots/wordpress": "~7.1.4",
     "roots/wp-config": "1.0.0",
     "wpackagist-theme/twentytwentythree": "^1.0",
-    "inpsyde/wp-translation-downloader": "^2.5"
+    "inpsyde/wp-translation-downloader": "^2.5",
+    "humanmade/s3-uploads": "^3.0",
+    "wp-cli/wp-cli": "^2.12",
+    "wp-cli/search-replace-command": "^2.1"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^4.0.1",
@@ -59,7 +62,7 @@
   "prefer-stable": true,
   "extra": {
     "installer-paths": {
-      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin", "humanmade/s3-uploads"],
       "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
       "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },

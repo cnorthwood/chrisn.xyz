@@ -107,6 +107,29 @@ Config::define('LOGGED_IN_SALT', env('LOGGED_IN_SALT'));
 Config::define('NONCE_SALT', env('NONCE_SALT'));
 
 /**
+ * Media uploads, kept in S3 by the S3 Uploads plugin if a bucket is set. Without one (as in local development), uploads
+ * stay on disk
+ */
+if (env('S3_UPLOADS_BUCKET')) {
+    Config::define('S3_UPLOADS_BUCKET', env('S3_UPLOADS_BUCKET'));
+    Config::define('S3_UPLOADS_KEY', env('S3_UPLOADS_KEY'));
+    Config::define('S3_UPLOADS_SECRET', env('S3_UPLOADS_SECRET'));
+    // RustFS ignores the region, but the AWS SDK needs one to sign requests
+    Config::define('S3_UPLOADS_REGION', env('S3_UPLOADS_REGION') ?: 'us-east-1');
+    // Read by the s3-uploads-endpoint mu-plugin
+    Config::define('S3_UPLOADS_ENDPOINT', env('S3_UPLOADS_ENDPOINT'));
+    // Where browsers fetch the files from
+    Config::define('S3_UPLOADS_BUCKET_URL', env('S3_UPLOADS_BUCKET_URL'));
+    // Set to false to load the plugin without using it. Its WP-CLI commands then aren't registered either, so run them
+    // with S3_UPLOADS_AUTOENABLE=true in the environment
+    Config::define('S3_UPLOADS_AUTOENABLE', env('S3_UPLOADS_AUTOENABLE') ?? true);
+    // Anyone can read the bucket through its bucket policy, so objects don't need their own ACL
+    Config::define('S3_UPLOADS_OBJECT_ACL', 'private');
+    // WordPress gives each upload and resized image a new name rather than overwriting one
+    Config::define('S3_UPLOADS_HTTP_CACHE_CONTROL', 'public, max-age=31536000');
+}
+
+/**
  * Custom Settings
  */
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);

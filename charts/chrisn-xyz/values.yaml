@@ -12,6 +12,20 @@ uploadsStoragePvcLabels: {}
 # the secret which contains the WordPress secrets
 wordpressSecretsName: wordpress
 
+# keep media uploads in an S3 bucket with the S3 Uploads plugin, rather than on disk
+s3Uploads:
+  enabled: false
+  # bucket the plugin writes to, optionally with a path inside it (bucket/path)
+  bucket: ""
+  # the S3 API the plugin writes through
+  endpoint: ""
+  # the public URL the site links to the files at
+  bucketUrl: ""
+  # if false, the plugin is loaded but not used
+  autoEnable: true
+  # secret with the bucket's RUSTFS_ACCESS_KEY and RUSTFS_SECRET_KEY
+  credentialsSecretName: ""
+
 service:
   type: ClusterIP
   port: 8080

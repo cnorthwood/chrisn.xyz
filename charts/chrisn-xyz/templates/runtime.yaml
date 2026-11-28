@@ -51,9 +51,45 @@ spec:
               value: "https://{{ .Values.ingress.hostname }}"
             - name: WP_SITEURL
               value: "https://{{ .Values.ingress.hostname }}/wp"
+            {{- with .Values.s3Uploads }}
+            {{- if .enabled }}
+            - name: S3_UPLOADS_BUCKET
+              value: "{{ .bucket }}"
+            - name: S3_UPLOADS_ENDPOINT
+              value: "{{ .endpoint }}"
+            - name: S3_UPLOADS_BUCKET_URL
+              value: "{{ .bucketUrl }}"
+            - name: S3_UPLOADS_AUTOENABLE
+              value: "{{ .autoEnable }}"
+            - name: S3_UPLOADS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .credentialsSecretName }}"
+                  key: RUSTFS_ACCESS_KEY
+            - name: S3_UPLOADS_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: "{{ .credentialsSecretName }}"
+                  key: RUSTFS_SECRET_KEY
+            {{- end }}
+            {{- end }}
           envFrom:
             - secretRef:
                 name: "{{ .Values.wordpressSecretsName }}"
+          # Keeps a new pod out of the Service until nginx and PHP are answering, so a rolling update doesn't send traffic
+          # to it early. The Host header makes WordPress serve the front page rather than redirect to it
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+              httpHeaders:
+                - name: Host
+                  value: "{{ .Values.ingress.hostname }}"
+                - name: X-Forwarded-Proto
+                  value: https
+            periodSeconds: 5
+            timeoutSeconds: 5
+            failureThreshold: 3
           volumeMounts:
             - mountPath: /app/web/app/uploads/
               name: wp-uploads

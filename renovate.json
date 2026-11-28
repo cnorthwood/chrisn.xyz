@@ -75,6 +75,11 @@
       "rangeStrategy": "update-lockfile"
     },
     {
+      "description": "Skip TypeScript 7.0: it ships without a JS API, so typescript-eslint can't run on it. Support is expected from 7.1 (https://github.com/typescript-eslint/typescript-eslint/issues/10940), which will get a PR as normal. Remove this rule then.",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "!/^7\\.0\\./"
+    },
+    {
       "description": "Weekly roll-up: minor and patch updates for application dependencies go into one PR, created on Monday morning alongside lockfile maintenance. Major updates and security fixes (vulnerabilityAlerts) are not covered by this rule, so they still open immediately. WordPress and MariaDB have their own rules above.",
       "matchManagers": ["composer", "npm", "github-actions"],
       "matchUpdateTypes": ["minor", "patch"],

@@ -6,8 +6,6 @@ metadata:
     {{- include "chrisn-xyz.labels" . | nindent 4 }}
 spec:
   replicas: 1
-  # Uploads are in S3, so nothing stops two pods running at once: start the new one and wait for it to be ready before
-  # stopping the old one
   strategy:
     type: RollingUpdate
     rollingUpdate:

@@ -4,6 +4,7 @@ import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended"
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
+  { ignores: ["dist/"] },
   { files: ["assets/**/*.{js,jsx,ts,tsx}", "__tests__/**/*.{js,jsx,ts,tsx}"] },
   eslint.configs.recommended,
   ...tseslint.configs.recommended,
